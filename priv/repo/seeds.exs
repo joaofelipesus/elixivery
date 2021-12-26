@@ -9,3 +9,12 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Elixivery.RestaurantKind
+alias Elixivery.Repo
+
+Repo.insert(%RestaurantKind{name: "Fast Food"})
+Repo.insert(%RestaurantKind{name: "Japonese"})
+Repo.insert(%RestaurantKind{name: "Italian"})
+Repo.insert(%RestaurantKind{name: "Pizza"})
+Repo.insert(%RestaurantKind{name: "Healthy"})
