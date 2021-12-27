@@ -1,5 +1,8 @@
 defmodule ElixiveryWeb.RestaurantsView do
-  def render("show.json", %{restaurant: restaurant}) do
+  use ElixiveryWeb, :view
+  alias Elixivery.Restaurant
+
+  def render("show.json", %{restaurant: %Restaurant{} = restaurant}) do
     %{
       id: restaurant.id,
       name: restaurant.name,
