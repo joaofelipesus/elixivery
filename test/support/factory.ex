@@ -6,4 +6,24 @@ defmodule Elixivery.Factory do
       name: "Italian"
     }
   end
+
+  def restaurant_factory do
+    %Elixivery.Restaurant{
+      name: "McDonalds",
+      status: :closed,
+      open_at: "18:00",
+      close_at: "23:00",
+      delivery_mean_time: 30
+    }
+  end
+
+  def restaurant_params_factory do
+    %{
+      name: "McDonalds",
+      status: :closed,
+      open_at: "18:00",
+      close_at: "23:00",
+      delivery_mean_time: 30
+    }
+  end
 end

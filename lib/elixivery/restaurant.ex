@@ -4,6 +4,7 @@ defmodule Elixivery.Restaurant do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
+  @attributes [:name, :delivery_mean_time, :status, :open_at, :close_at]
 
   schema "restaurants" do
     field :name, :string
@@ -17,9 +18,10 @@ defmodule Elixivery.Restaurant do
 
   def changeset(struct \\ %__MODULE__{}, params, restaurant_kind) do
     struct
-    |> cast(params, [:name, :delivery_mean_time, :status, :open_at, :close_at])
+    |> cast(params, @attributes)
     |> put_assoc(:restaurant_kind, restaurant_kind)
-    |> validate_required([:name, :delivery_mean_time, :status, :open_at, :close_at])
+    # |> validate_required([:name, :delivery_mean_time, :status, :open_at, :close_at, :restaurant_kind])
+    |> validate_required([:restaurant_kind | @attributes])
     |> unique_constraint([:name])
   end
 

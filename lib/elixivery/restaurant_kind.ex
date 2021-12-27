@@ -6,7 +6,7 @@ defmodule Elixivery.RestaurantKind do
 
   schema "restaurant_kinds" do
     field :name, :string
-    has_many :restaurants, Elixivery.Restarant
+    has_many :restaurants, Elixivery.Restaurant
     timestamps()
   end
 
