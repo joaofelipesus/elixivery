@@ -20,7 +20,6 @@ defmodule Elixivery.Restaurant do
     struct
     |> cast(params, @attributes)
     |> put_assoc(:restaurant_kind, restaurant_kind)
-    # |> validate_required([:name, :delivery_mean_time, :status, :open_at, :close_at, :restaurant_kind])
     |> validate_required([:restaurant_kind | @attributes])
     |> unique_constraint([:name])
   end
