@@ -7,7 +7,7 @@ defmodule ElixiveryWeb.Router do
 
   scope "/api", ElixiveryWeb do
     pipe_through :api
-    resources "/restaurants", ElixiveryWeb.RestaurantController, except: [:edit, :new]
+    resources "/restaurants", RestaurantsController, except: [:edit, :new]
   end
 
   # Enables LiveDashboard only for development
