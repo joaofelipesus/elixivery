@@ -2,6 +2,29 @@ defmodule ElixiveryWeb.RestaurantsControllerTest do
   use ElixiveryWeb.ConnCase, async: true
   import Elixivery.Factory
 
+  describe "#index/2" do
+    test "returns status ok and a list with all restaurants", %{conn: conn} do
+      insert(:restaurant)
+      response = conn
+      |> get(Routes.restaurants_path(conn, :index))
+      |> json_response(:ok)
+      assert [
+        %{
+          "close_at" => "23:00",
+          "delivery_mean_time" => 30,
+          "id" => _,
+          "name" => "McDonalds",
+          "open_at" => "18:00",
+          "restaurant_kind" => %{
+            "id" => _,
+            "name" => "Italian"
+          },
+          "status" => "closed"
+        }
+      ] = response
+    end
+  end
+
   describe "#show/2" do
     test "when received id is valid", %{conn: conn} do
       restaurant = insert(:restaurant)
