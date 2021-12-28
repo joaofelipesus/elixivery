@@ -52,4 +52,49 @@ defmodule ElixiveryWeb.RestaurantsControllerTest do
       assert %{"message" => "Restaurant not found"} = response
     end
   end
+
+  describe "#create/2" do
+    test "when received params are ok", %{conn: conn} do
+      restaurant_kind = insert(:restaurant_kind)
+      params = %{
+        "name" => "Dog Show",
+        "delivery_mean_time" => 30,
+        "status" => "open",
+        "open_at" => "19:00",
+        "close_at" => "21:30",
+        "restaurant_kind_id" => restaurant_kind.id
+      }
+      response = conn
+      |> post(Routes.restaurants_path(conn, :create, params))
+      |> json_response(:created)
+      assert %{
+        "close_at" => "21:30",
+        "delivery_mean_time" => 30,
+        "id" => _id,
+        "name" => "Dog Show",
+        "open_at" => "19:00",
+        "restaurant_kind" => %{
+          "id" => _restaurant_kind_id,
+          "name" => "Italian"
+        },
+        "status" => "open"
+      } = response
+    end
+
+    test "when received params has problems", %{conn: conn} do
+      restaurant_kind = insert(:restaurant_kind)
+      params = %{
+        "name" => "Dog Show",
+        "delivery_mean_time" => 30,
+        "status" => "opened",
+        "open_at" => "19:00",
+        "close_at" => "21:30",
+        "restaurant_kind_id" => restaurant_kind.id
+      }
+      response = conn
+      |> post(Routes.restaurants_path(conn, :create, params))
+      |> json_response(:bad_request)
+      assert %{"messages" => %{"status" => ["is invalid"]}} == response
+    end
+  end
 end

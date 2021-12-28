@@ -20,10 +20,6 @@ defmodule ElixiveryWeb.ErrorView do
     %{messages: handle_messages(changeset)}
   end
 
-  def render(:error, message: message) do
-    %{message: message}
-  end
-
   defp handle_messages(changeset) do
     Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
       Enum.reduce(opts, msg, fn {key, value}, acc ->

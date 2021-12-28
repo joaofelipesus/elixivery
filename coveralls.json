@@ -1,0 +1,15 @@
+{
+  "skip_files": [
+    "test/support",
+    "lib/elixivery/mailer.ex",
+    "lib/elixivery_web.ex",
+    "lib/elixivery_web/gettext.ex",
+    "lib/elixivery_web/router.ex",
+    "lib/elixivery/repo.ex",
+    "lib/elixivery/application.ex",
+    "lib/elixivery.ex",
+    "lib/elixivery_web/endpoint.ex",
+    "lib/elixivery_web/telemetry.ex",
+    "lib/elixivery_web/views/error_helpers.ex"
+  ]
+}
