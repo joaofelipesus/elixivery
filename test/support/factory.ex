@@ -14,7 +14,7 @@ defmodule Elixivery.Factory do
       open_at: "18:00",
       close_at: "23:00",
       delivery_mean_time: 30,
-      restaurant_kind: insert(:restaurant_kind)
+      restaurant_kind: build(:restaurant_kind)
     }
   end
 

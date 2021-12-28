@@ -1,16 +1,14 @@
 defmodule ElixiveryWeb.RestaurantsController do
   use ElixiveryWeb, :controller
-  alias Elixivery.Services.Restaurant.Find
+  alias Elixivery.Services.Restaurant.{Find, List}
   alias Elixivery.Repo
 
   action_fallback ElixiveryWeb.FallbackController
 
   def index(conn, _params) do
-    restaurants = Repo.all(Elixivery.Restaurant)
-    |> Repo.preload(:restaurant_kind)
     conn
     |> put_status(:ok)
-    |> render("index.json", %{restaurants: restaurants})
+    |> render("index.json", %{restaurants: List.all})
   end
 
   def show(conn, %{"id" => id}) do
