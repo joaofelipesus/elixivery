@@ -1,7 +1,6 @@
 defmodule ElixiveryWeb.RestaurantsController do
   use ElixiveryWeb, :controller
   alias Elixivery.Services.Restaurant.{Find, List}
-  alias Elixivery.Repo
 
   action_fallback ElixiveryWeb.FallbackController
 
