@@ -2,6 +2,7 @@ defmodule Elixivery.Services.Restaurant.CreateTest do
   use ExUnit.Case
   use Elixivery.DataCase, async: true
   import Elixivery.Factory
+  alias Elixivery.Services.Restaurant.Create
 
   setup do
     restaurant_kind = insert(:restaurant_kind)
@@ -18,7 +19,7 @@ defmodule Elixivery.Services.Restaurant.CreateTest do
         "restaurant_kind_id" => state[:restaurant_kind].id,
         "status" => :open
       }
-      result = Elixivery.Services.Restaurant.Create.call(params)
+      result = Create.call(params)
       assert {:ok, %Elixivery.Restaurant{}} = result
     end
 
@@ -31,7 +32,7 @@ defmodule Elixivery.Services.Restaurant.CreateTest do
         "restaurant_kind_id" => state[:restaurant_kind].id,
         "status" => :open
       }
-      result = Elixivery.Services.Restaurant.Create.call(params)
+      result = Create.call(params)
       assert {:error, %Ecto.Changeset{errors: errors}} = result
       assert errors == [name: {"can't be blank", [validation: :required]}]
     end
@@ -45,7 +46,7 @@ defmodule Elixivery.Services.Restaurant.CreateTest do
         "restaurant_kind_id" => "c53ce22e-5a71-45dc-ad1e-cde634dba270",
         "status" => :open
       }
-      result = Elixivery.Services.Restaurant.Create.call(params)
+      result = Create.call(params)
       assert {:error, [message: "Restaurant kind id invalid."]} == result
     end
   end

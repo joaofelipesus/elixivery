@@ -16,7 +16,23 @@ defmodule ElixiveryWeb.ErrorView do
 
   def render("404.json", %{message: message}), do: %{message: message}
 
+  def render("400.json", %{errors: %Ecto.Changeset{} = changeset}) do
+    %{messages: handle_messages(changeset)}
+  end
+
   def render(:error, message: message) do
     %{message: message}
   end
+
+  defp handle_messages(changeset) do
+    Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
+      Enum.reduce(opts, msg, fn {key, value}, acc ->
+        String.replace(acc, "%{#{key}}", translate_value(value))
+      end)
+    end)
+  end
+
+  defp translate_value({:parameterized, Ecto.Enum, _map}), do: ""
+
+  defp translate_value(value), do: to_string(value)
 end
