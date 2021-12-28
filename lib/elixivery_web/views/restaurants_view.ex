@@ -2,7 +2,13 @@ defmodule ElixiveryWeb.RestaurantsView do
   use ElixiveryWeb, :view
   alias Elixivery.Restaurant
 
-  def render("show.json", %{restaurant: %Restaurant{} = restaurant}) do
+  def render("index.json", %{restaurants: restaurants}) do
+    Enum.map(restaurants, fn restaurant -> serialize_restaurant(restaurant) end)
+  end
+
+  def render("show.json", %{restaurant: %Restaurant{} = restaurant}), do: serialize_restaurant(restaurant)
+
+  defp serialize_restaurant(%Restaurant{} = restaurant) do
     %{
       id: restaurant.id,
       name: restaurant.name,
