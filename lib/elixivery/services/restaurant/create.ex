@@ -6,10 +6,12 @@ defmodule Elixivery.Services.Restaurant.Create do
     case Utils.valid_restaurant_kind?(params["restaurant_kind_id"]) do
       true ->
         params
-        |> Restaurant.changeset
+        |> Restaurant.changeset()
         |> Repo.insert()
         |> Utils.reload_restaurant()
-      false -> {:error, message: "Restaurant kind id invalid."}
+
+      false ->
+        {:error, message: "Restaurant kind id invalid."}
     end
   end
 end

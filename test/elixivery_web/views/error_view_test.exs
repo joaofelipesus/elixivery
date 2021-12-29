@@ -17,6 +17,7 @@ defmodule ElixiveryWeb.ErrorViewTest do
 
   test "renders 400.json" do
     restaurant = insert(:restaurant, name: "Eat Fit")
+
     params = %{
       name: "Eat Fit",
       status: :closed,

@@ -27,8 +27,8 @@ defmodule ElixiveryWeb.RestaurantsController do
     end
   end
 
-  def update(conn, %{"id" => id } = params) do
-    with { :ok, %Restaurant{} = restaurant} <- Update.call(id, params) do
+  def update(conn, %{"id" => id} = params) do
+    with {:ok, %Restaurant{} = restaurant} <- Update.call(id, params) do
       conn
       |> put_status(:ok)
       |> render("show.json", %{restaurant: restaurant})

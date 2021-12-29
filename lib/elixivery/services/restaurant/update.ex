@@ -11,7 +11,9 @@ defmodule Elixivery.Services.Restaurant.Update do
 
   defp update_restaurant(id, params) do
     case Elixivery.Services.Restaurant.Find.by_id(id) do
-      {:error, message: message} -> {:error, message: message}
+      {:error, message: message} ->
+        {:error, message: message}
+
       {:ok, restaurant: %Elixivery.Restaurant{} = restaurant} ->
         restaurant
         |> Restaurant.changeset(params)

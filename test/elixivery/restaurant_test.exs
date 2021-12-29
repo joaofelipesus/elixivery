@@ -5,6 +5,7 @@ defmodule Elixivery.RestaurantTest do
 
   setup do
     restaurant_kind = insert(:restaurant_kind)
+
     params = %{
       "name" => "Some new name",
       "delivery_mean_time" => 45,
@@ -13,6 +14,7 @@ defmodule Elixivery.RestaurantTest do
       "status" => "closed",
       "restaurant_kind_id" => restaurant_kind.id
     }
+
     {:ok, params: params}
   end
 
