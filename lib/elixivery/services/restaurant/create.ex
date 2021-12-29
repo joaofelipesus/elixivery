@@ -7,6 +7,7 @@ defmodule Elixivery.Services.Restaurant.Create do
         params
         |> Restaurant.changeset
         |> Repo.insert()
+        |> reload_restaurant()
       false -> {:error, message: "Restaurant kind id invalid."}
     end
   end
@@ -15,6 +16,13 @@ defmodule Elixivery.Services.Restaurant.Create do
     case Repo.get(RestaurantKind, restaurant_kind_id) do
       %RestaurantKind{} -> true
       _ -> false
+    end
+  end
+
+  defp reload_restaurant(changeset) do
+    case changeset do
+      {:ok, restaurant} -> {:ok, Repo.preload(restaurant, :restaurant_kind, force: true)}
+      error -> error
     end
   end
 end

@@ -17,12 +17,18 @@ defmodule ElixiveryWeb.ErrorViewTest do
 
   test "renders 400.json" do
     restaurant = insert(:restaurant, name: "Eat Fit")
-    params = restaurant_params_factory()
-    params = %{params | name: "Eat Fit"}
+    params = %{
+      name: "Eat Fit",
+      status: :closed,
+      open_at: "18:00",
+      close_at: "23:00",
+      delivery_mean_time: 30,
+      restaurant_kind_id: restaurant.restaurant_kind_id
+    }
 
     {:error, %Ecto.Changeset{} = changeset} =
       params
-      |> Elixivery.Restaurant.changeset(restaurant.restaurant_kind)
+      |> Elixivery.Restaurant.changeset()
       |> Elixivery.Repo.insert()
 
     serialized_errors = render(ErrorView, "400.json", %{errors: changeset})
