@@ -1,6 +1,6 @@
 defmodule ElixiveryWeb.RestaurantsController do
   use ElixiveryWeb, :controller
-  alias Elixivery.Services.Restaurant.{Create, Find, List}
+  alias Elixivery.Services.Restaurant.{Create, Find, List, Update}
   alias Elixivery.Restaurant
 
   action_fallback ElixiveryWeb.FallbackController
@@ -23,6 +23,14 @@ defmodule ElixiveryWeb.RestaurantsController do
     with {:ok, %Restaurant{} = restaurant} <- Create.call(params) do
       conn
       |> put_status(:created)
+      |> render("show.json", %{restaurant: restaurant})
+    end
+  end
+
+  def update(conn, %{"id" => id } = params) do
+    with { :ok, %Restaurant{} = restaurant} <- Update.call(id, params) do
+      conn
+      |> put_status(:ok)
       |> render("show.json", %{restaurant: restaurant})
     end
   end

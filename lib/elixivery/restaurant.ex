@@ -19,16 +19,7 @@ defmodule Elixivery.Restaurant do
   def changeset(struct \\ %__MODULE__{}, params) do
     struct
     |> cast(params, @attributes)
-    # |> put_assoc(:restaurant_kind, restaurant_kind)
     |> validate_required(@attributes)
     |> unique_constraint([:name])
   end
-
-  # def changeset(struct \\ %__MODULE__{}, params, restaurant_kind) do
-  #   struct
-  #   |> cast(params, @attributes)
-  #   # |> put_assoc(:restaurant_kind, restaurant_kind)
-  #   |> validate_required([:restaurant_kind | @attributes])
-  #   |> unique_constraint([:name])
-  # end
 end
