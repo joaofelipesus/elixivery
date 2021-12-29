@@ -3,8 +3,8 @@ defmodule Elixivery.Services.Restaurant.Update do
 
   def call(id, params) do
     case valid_restaurant_kind?(params["restaurant_kind_id"]) do
-      :ok -> update_restaurant(id, params)
-      :error -> {:error, message: "Restaurant kind invalid"}
+      true -> update_restaurant(id, params)
+      false -> {:error, message: "Restaurant kind invalid"}
     end
   end
 
@@ -28,8 +28,8 @@ defmodule Elixivery.Services.Restaurant.Update do
 
   defp valid_restaurant_kind?(restaurant_kind_id) do
     case Repo.get(RestaurantKind, restaurant_kind_id) do
-      %RestaurantKind{} -> :ok
-      _ -> :error
+      %RestaurantKind{} -> true
+      _ -> false
     end
   end
 end
