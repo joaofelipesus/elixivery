@@ -1,8 +1,9 @@
 defmodule Elixivery.Services.Restaurant.Update do
-  alias Elixivery.{Repo, Restaurant, RestaurantKind}
+  alias Elixivery.{Repo, Restaurant}
+  alias Elixivery.Services.Restaurant.Utils
 
   def call(id, params) do
-    case valid_restaurant_kind?(params["restaurant_kind_id"]) do
+    case Utils.valid_restaurant_kind?(params["restaurant_kind_id"]) do
       true -> update_restaurant(id, params)
       false -> {:error, message: "Restaurant kind invalid"}
     end
@@ -15,21 +16,7 @@ defmodule Elixivery.Services.Restaurant.Update do
         restaurant
         |> Restaurant.changeset(params)
         |> Repo.update()
-        |> reload_restaurant()
-    end
-  end
-
-  defp reload_restaurant(changeset) do
-    case changeset do
-      {:ok, restaurant} -> {:ok, Repo.preload(restaurant, :restaurant_kind, force: true)}
-      error -> error
-    end
-  end
-
-  defp valid_restaurant_kind?(restaurant_kind_id) do
-    case Repo.get(RestaurantKind, restaurant_kind_id) do
-      %RestaurantKind{} -> true
-      _ -> false
+        |> Utils.reload_restaurant()
     end
   end
 end
