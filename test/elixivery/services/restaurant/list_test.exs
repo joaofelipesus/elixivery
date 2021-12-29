@@ -10,12 +10,12 @@ defmodule Elixivery.Services.Restaurant.ListTest do
       insert(:restaurant, name: "McDonald's", restaurant_kind: restaurant_kind)
       insert(:restaurant, name: "Burger King", restaurant_kind: restaurant_kind)
       insert(:restaurant, name: "Au Au", restaurant_kind: restaurant_kind)
-      restaurants = List.all
+      restaurants = List.all()
       assert length(restaurants) == 3
     end
 
     test "when there is no restaurants it returns an empty list" do
-      assert List.all == []
+      assert List.all() == []
     end
   end
 end

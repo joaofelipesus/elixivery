@@ -13,11 +13,15 @@ defmodule Elixivery.RestaurantKindTest do
   test "when name is already in use" do
     insert(:restaurant_kind, name: "Italian")
     response = Repo.insert(RestaurantKind.changeset(%{name: "Italian"}))
-    assert {:error, %Ecto.Changeset{
-      valid?: false,
-      errors: [
-        name: {"has already been taken", [constraint: :unique, constraint_name: "restaurant_kinds_name_index"]}
-      ]}
-    } = response
+
+    assert {:error,
+            %Ecto.Changeset{
+              valid?: false,
+              errors: [
+                name:
+                  {"has already been taken",
+                   [constraint: :unique, constraint_name: "restaurant_kinds_name_index"]}
+              ]
+            }} = response
   end
 end

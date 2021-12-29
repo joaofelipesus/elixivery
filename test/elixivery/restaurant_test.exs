@@ -16,24 +16,26 @@ defmodule Elixivery.RestaurantTest do
   test '#changeset/3 when received params has problems', state do
     params = %{name: nil, status: nil, open_at: nil, close_at: nil, delivery_mean_time: nil}
     changeset = Restaurant.changeset(params, state[:restaurant_kind])
+
     assert %{
-      valid?: false,
-      errors: [
-        name: {"can't be blank", [validation: :required]},
-        delivery_mean_time: {"can't be blank", [validation: :required]},
-        status: {"can't be blank", [validation: :required]},
-        open_at: {"can't be blank", [validation: :required]},
-        close_at: {"can't be blank", [validation: :required]}
-      ]
-    } = changeset
+             valid?: false,
+             errors: [
+               name: {"can't be blank", [validation: :required]},
+               delivery_mean_time: {"can't be blank", [validation: :required]},
+               status: {"can't be blank", [validation: :required]},
+               open_at: {"can't be blank", [validation: :required]},
+               close_at: {"can't be blank", [validation: :required]}
+             ]
+           } = changeset
   end
 
   test '#changeset/3 when received restaurant kind is invalid' do
     params = restaurant_params_factory()
     changeset = Restaurant.changeset(params, nil)
+
     assert %{
-      valid?: false,
-      errors: [restaurant_kind: {"can't be blank", [validation: :required]}]
-    } = changeset
+             valid?: false,
+             errors: [restaurant_kind: {"can't be blank", [validation: :required]}]
+           } = changeset
   end
 end

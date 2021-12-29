@@ -6,7 +6,8 @@ defmodule ElixiveryWeb.RestaurantsView do
     Enum.map(restaurants, fn restaurant -> serialize_restaurant(restaurant) end)
   end
 
-  def render("show.json", %{restaurant: %Restaurant{} = restaurant}), do: serialize_restaurant(restaurant)
+  def render("show.json", %{restaurant: %Restaurant{} = restaurant}),
+    do: serialize_restaurant(restaurant)
 
   defp serialize_restaurant(%Restaurant{} = restaurant) do
     %{

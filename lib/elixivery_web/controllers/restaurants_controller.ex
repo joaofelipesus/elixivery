@@ -8,7 +8,7 @@ defmodule ElixiveryWeb.RestaurantsController do
   def index(conn, _params) do
     conn
     |> put_status(:ok)
-    |> render("index.json", %{restaurants: List.all})
+    |> render("index.json", %{restaurants: List.all()})
   end
 
   def show(conn, %{"id" => id}) do

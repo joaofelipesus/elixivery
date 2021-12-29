@@ -19,10 +19,12 @@ defmodule ElixiveryWeb.ErrorViewTest do
     restaurant = insert(:restaurant, name: "Eat Fit")
     params = restaurant_params_factory()
     params = %{params | name: "Eat Fit"}
+
     {:error, %Ecto.Changeset{} = changeset} =
       params
       |> Elixivery.Restaurant.changeset(restaurant.restaurant_kind)
-      |> Elixivery.Repo.insert
+      |> Elixivery.Repo.insert()
+
     serialized_errors = render(ErrorView, "400.json", %{errors: changeset})
     assert serialized_errors == %{messages: %{name: ["has already been taken"]}}
   end
