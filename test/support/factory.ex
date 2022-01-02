@@ -27,4 +27,13 @@ defmodule Elixivery.Factory do
       delivery_mean_time: 30
     }
   end
+
+  def product_factory do
+    %Elixivery.Product{
+      kind: :drink,
+      name: "Coca-Cola zero",
+      price: 2.99,
+      restaurant_id: build(:restaurant).id
+    }
+  end
 end

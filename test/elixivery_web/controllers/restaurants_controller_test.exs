@@ -130,21 +130,21 @@ defmodule ElixiveryWeb.RestaurantsControllerTest do
 
       response =
         conn
-        |> put(Routes.restaurants_path(conn, :update, restaurant.id,params))
+        |> put(Routes.restaurants_path(conn, :update, restaurant.id, params))
         |> json_response(:ok)
 
       assert %{
-              "close_at" => "21:30",
-              "delivery_mean_time" => 30,
-              "id" => _id,
-              "name" => "Dog Show UPDATED",
-              "open_at" => "19:00",
-              "restaurant_kind" => %{
-                "id" => _restaurant_kind_id,
-                "name" => "Italian"
-              },
-              "status" => "open"
-            } = response
+               "close_at" => "21:30",
+               "delivery_mean_time" => 30,
+               "id" => _id,
+               "name" => "Dog Show UPDATED",
+               "open_at" => "19:00",
+               "restaurant_kind" => %{
+                 "id" => _restaurant_kind_id,
+                 "name" => "Italian"
+               },
+               "status" => "open"
+             } = response
     end
 
     test "when received params has problems", %{conn: conn} do
