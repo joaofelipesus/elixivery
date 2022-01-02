@@ -4,8 +4,8 @@ defmodule ElixiveryWeb.ProductsViewTest do
   import Elixivery.Factory
   alias ElixiveryWeb.RestaurantsView
 
-  describe "render(\"show.json\", %{product: product})" do
-    product = insert(:product)
-    # continue
-  end
+  # describe "render(\"show.json\", %{product: product})" do
+  #   product = insert(:product)
+  #   # continue
+  # end
 end

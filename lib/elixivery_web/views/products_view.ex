@@ -5,7 +5,7 @@ defmodule ElixiveryWeb.ProductsView do
   def render("show.json", %{product: %Product{} = product}), do: serialize(product)
 
   def render("index.json", %{products: products}) do
-    Enum.map(restaurants, fn restaurant -> serialize(restaurant) end)
+    Enum.map(products, fn product -> serialize(product) end)
   end
 
   defp serialize(%Product{} = product) do
